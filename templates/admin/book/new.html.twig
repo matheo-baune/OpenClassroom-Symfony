@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un livre!{% endblock %}
+{% set isCreating = app.current_route =='app_admin_book_new' %}
+{% set action =  isCreating ? 'Ajout' : 'Édition' %}
+{% set labelButton =  isCreating ? 'Créer' : 'Modifier' %}
+
+{% block title %} {{ action }} d'un livre!{% endblock %}
 
 {% block body %}
 
     <section class="container px-4">
         <div class="w-50 m-auto">
-            <h1>Ajout de livre</h1>
+            <h1>{{ action}} de livre</h1>
 
             {{ form_start(form) }}
             {{ form_row(form.title, {label: 'Titre'}) }}
@@ -18,7 +22,7 @@
             {{ form_row(form.status, {label: 'Statut'}) }}
             {{ form_row(form.editor, {label: 'Éditeur'}) }}
             {{ form_row(form.authors, {label: 'Auteurs'}) }}
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <button type="submit" class="btn btn-primary">{{ labelButton }}</button>
             {{ form_end(form) }}
         </div>
     </section>

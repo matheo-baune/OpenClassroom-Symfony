@@ -27,6 +27,7 @@
             <div>Auteur non trouvé</div>
         {% endif %}
         <a href="{{ path('app_author_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        <a href="{{ path('app_admin_author_edit', {id: author.id}) }}" class="btn btn-warning">Éditer</a>
     </section>
 
 {% endblock %}

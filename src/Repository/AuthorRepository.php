@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,10 +17,8 @@ class AuthorRepository extends ServiceEntityRepository
         parent::__construct($registry, Author::class);
     }
 
-    /**
-     * @throws \DateMalformedStringException
-     */
-    public function findByDateOfBirth(array $dates = []): array
+
+    public function findByDateOfBirth(array $dates = []): QueryBuilder
     {
         $query = $this->createQueryBuilder('a');
 
@@ -34,9 +33,7 @@ class AuthorRepository extends ServiceEntityRepository
         }
 
 
-        return $query->orderBy('a.dateOfBirth', 'DESC')
-            ->getQuery()
-            ->getResult();
+        return $query->orderBy('a.id', 'ASC');
     }
 
     //    /**

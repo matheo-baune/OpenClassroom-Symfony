@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'un livre{% endblock %}
+
+{% block body %}
+
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{{ book.cover }}" alt="Image du livre {{ book.title  }}" /></div>
+                <div class="col-md-8">
+                    <div class="small mb-1">ISBN: {{ book.isbn }}</div>
+                    <h1 class="display-5 fw-bolder">{{ book.title }}</h1>
+                    <p class="p-0 m-0">Auteur(s) : {% for author in book.authors %} {{ author.name }} {% endfor %}</p>
+                    <p class="p-0 m-0">Éditeur: {{ book.editor.name }}</p>
+                    <p class="p-0 m-0">{{ book.pageNumber }} pages - {{ book.editedAt | date('d M Y') }}</p>
+                    <p class="p-0 mt-0">Status : {{ book.status.getLabel() }}</p>
+                    <p class="lead">{{ book.plot }}</p>
+                    <div class="d-flex">
+                        <a class="btn btn-outline-dark flex-shrink-0 me-3" type="button" href="{{ path('app_book_index') }}">
+                            Retour à la liste
+                        </a>
+                        <a class="btn btn-warning" href="{{ path('app_admin_book_edit', {id: book.id}) }}">Modifier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
